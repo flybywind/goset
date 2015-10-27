@@ -6,6 +6,20 @@ import (
 	"testing"
 )
 
+func TestInit(t *testing.T) {
+	type int_slice []int
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("catch error:", err)
+		} else {
+			t.Fatal("not detect error")
+		}
+	}()
+	s1 := int_slice{1, 2, 3}
+	s2 := int_slice{1, 2, 3}
+	goset.SliceInit([]int_slice{s1, s2})
+}
+
 func TestContain(t *testing.T) {
 	content := []string{"abc", "xyz"}
 	s := goset.SliceInit(content)
